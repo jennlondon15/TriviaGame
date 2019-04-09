@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <script href="./assets/javascript/cursor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
@@ -15,25 +16,21 @@
         <!-- header -->
         <div class="header">
           <h1>Disney Trivia</h1>
+          <button id="start">Click Me Bitch</button>
         </div>
         <!-- Time Counter Card -->
         <div class="timer">
-          Time Remaining:
+          Time Remaining: <span id="counter-number"></span> Seconds
         </div>
         <!-- Question Card -->
         <div class="question">
           Question:
         </div>
         <!-- Answer Selection -->
-        <div class="answer">
-          <p>Option 1:</p>
-          <p>Option 2:</p>
-          <p>Option 3:</p>
-          <p>Option 4:</p>
-        </div>
+        <div class="answer"></div>
       </div>
     </div>
+    <script src="./assets/javascript/questions.js"></script>
     <script src="./assets/javascript/app.js"></script>
-    <script src="./assets/javascript/cursor.js"></script>
   </body>
 </html>
