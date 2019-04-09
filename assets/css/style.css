@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'minnie';
+  src: url('http://static.tumblr.com/npggxjg/wDFm11fnh/minnie_mouse.ttf');
+}
+
+@font-face {
+  font-family: 'Disney';
+  src: url('http://static.tumblr.com/npggxjg/VdAlzs1dx/disney.otf');
+}
+
+* {
+  cursor: url(http://cur.cursors-4u.net/toons/too-9/too909.ani),
+    url(http://cur.cursors-4u.net/toons/too-9/too909.png), auto !important;
+}
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  background: url(../images/bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: 'minnie', Arial, Helvetica, sans-serif;
+}
+
+.container {
+  margin: 1rem;
+  display: grid;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0.5rem;
+  grid-template-areas:
+    'header'
+    'timer'
+    'question'
+    'answer';
+  background-color: rgba(31, 31, 31, 0.47);
+  border-style: solid;
+  border-width: 0.5px;
+  color: whitesmoke;
+  padding: 10px;
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.header > h1 {
+  font-family: 'Disney', Arial, Helvetica, sans-serif;
+  font-size: 5rem;
+  padding: 1rem;
+  margin: 0;
+}
+
+.timer {
+  grid-area: timer;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.question {
+  grid-area: question;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.answer {
+  grid-area: answer;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
