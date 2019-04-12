@@ -62,6 +62,10 @@ body {
   margin: 0;
 }
 
+.timer {
+  padding: 0.5rem;
+}
+
 .quiz {
   grid-area: timer;
   text-align: center;
