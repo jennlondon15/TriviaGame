@@ -6,7 +6,7 @@ const game = {
   incorrect: 0,
   question: $('.question'),
   answers: $('.answers'),
-  delay: 8000,
+  delay: 5000,
 
   // timer count
   countdown() {
