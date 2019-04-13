@@ -2,7 +2,7 @@
 
 Check your park knowledge and maybe learn something new.
 
-![Disneyland Trivia]("https://user-images.githubusercontent.com/46270669/56073717-c9c93e80-5d65-11e9-9895-9ddb26cf96b8.png)
+![Disneyland Trivia](https://user-images.githubusercontent.com/46270669/56073717-c9c93e80-5d65-11e9-9895-9ddb26cf96b8.png)
 
 ## Getting Started
 
