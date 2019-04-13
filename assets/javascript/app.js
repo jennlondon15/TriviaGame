@@ -1,160 +1,48 @@
-// TODO Display answer options in column
-// TODO Add a "next question" button when answer screen shows up
-
-const panel = $('.quiz');
-const countStartNumber = 30;
-
-// click event: play again button
-$(document).on('click', '#play-again', function(e) {
-  game.reset();
-});
-
-// click event: answer selected
-$(document).on('click', '.answer-button', function(e) {
-  game.clicked(e);
-});
-
-// click event: start button
-$(document).on('click', '.start', function(e) {
-  $('.timer').prepend(
-    '<h2>Time Remaining: <span id="timed-number">30</span> Seconds</h2>',
-  );
-  game.loadQuestion();
-});
-
-// question array
-const questions = [
-  {
-    question: 'How much were admission prices when Disney World first opened?',
-    answers: ['$1.10', '$1.00', '$0.75', '$1.50'],
-    correctAnswer: '$1.00',
-    image: './assets/images/question1.jpg',
-  },
-  {
-    question:
-      'When Disneyland was first built, what occupied the land before it was bought by Walt?',
-    answers: ['A horse track', 'Open land', 'An apple farm', 'An orange grove'],
-    correctAnswer: 'An orange grove',
-    image: './assets/images/question2.jpg',
-  },
-  {
-    question:
-      'After building Disneyland, where did Walt always live when he visited Disneyland?',
-    answers: [
-      'Above the firehouse',
-      'A small apartment in Club 33',
-      'In the Cinderella castle',
-      'A house near the park',
-    ],
-    correctAnswer: 'Above the firehouse',
-    image: './assets/images/question3.jpg',
-  },
-  {
-    question:
-      'At the train station in New Orleans Square, guests can hear a telegraph clicking away. What does the message say?',
-    answers: [
-      'It is the lyrics to "The Mickey Mouse Club" theme',
-      'It is the speech Walt Disney gave when the park first opened',
-      'It is the lyrics to Walts favorite song, "Feed the birds"',
-      'Nothing, just random clicks',
-    ],
-    correctAnswer:
-      'It is the speech Walt Disney gave when the park first opened',
-    image: './assets/images/question4.jpg',
-  },
-  {
-    question: 'What was Mickey Mouse originally named?',
-    answers: ['Elias Mouse', 'Oswald', 'Nicolas Mouse', 'Mortimer Mouse'],
-    correctAnswer: 'Mortimer Mouse',
-    image: './assets/images/question5.jpg',
-  },
-  {
-    question: 'Which Disneyland attraction was present opening day?',
-    answers: [
-      'Dumbo the Flying Elephant',
-      'Alice In Wonderland',
-      'The Jungle Cruise',
-      'The Enchanted Tiki Room',
-    ],
-    correctAnswer: 'The Jungle Cruise',
-    image: './assets/images/question6.jpg',
-  },
-  {
-    question:
-      'What is the name of the exclusive, invite-only car on the Disneyland Railroad?',
-    answers: ['Lily Bell', 'C.K. Holliday', 'Ron Disney', 'Minnie Mouse'],
-    correctAnswer: 'Lily Bell',
-    image: './assets/images/question7.jpg',
-  },
-  {
-    question: 'How many days did it take to build Disneyland?',
-    answers: ['1251', '421', '365', '999'],
-    correctAnswer: '365',
-    image: './assets/images/question8.jpg',
-  },
-  {
-    question:
-      'What is the most expensive Disneyland Resort attraction ever built?',
-    answers: [
-      'Radiator Springs Racers',
-      'Star Tours',
-      'Twilight Zone Tower of Terror',
-      'Indiana Jones Adventure: Temple of the Forbidden Eye',
-    ],
-    correctAnswer: 'Radiator Springs Racers',
-    image: './assets/images/question9.jpg',
-  },
-  {
-    question:
-      'What was the last attraction which Walt Disney himself participated in designing?',
-    answers: [
-      'Fantasmic!',
-      'Big Thunder Mountain Railroad',
-      'The Pirates of the Caribbean',
-      'Peter Pans Flight',
-    ],
-    correctAnswer: 'The Pirates of the Caribbean',
-    image: './assets/images/question10.jpeg',
-  },
-];
-
 // game play
 const game = {
-  questions,
   currentQuestion: 0,
-  count: countStartNumber,
+  count: 30,
   correct: 0,
   incorrect: 0,
+  question: $('.question'),
+  answers: $('.answers'),
+  delay: 5000,
 
   // timer count
   countdown() {
-    game.count--;
+    game.count -= 1;
     $('#timed-number').html(game.count);
-    // console.log('#count-number');
 
     // timer: time up
     if (game.count === 0) {
-      // console.log('Looks Like You Ran Out Of Time!');
       game.timeUp();
     }
   },
+
   loadQuestion() {
     timer = setInterval(game.countdown, 1000);
-    panel.html(`<h2>${questions[this.currentQuestion].question}</h2>`);
-    for (let i = 0; i < questions[this.currentQuestion].answers.length; i++) {
-      panel.append(
-        `${'<button class="answer-button" class="button"' + 'data-name="'}${
-          questions[this.currentQuestion].answers[i]
-        }">${questions[this.currentQuestion].answers[i]}</button>`,
+    game.question.html(`<h2>${questions[game.currentQuestion].question}</h2>`);
+    $('.timer').show();
+    game.answers.show();
+    game.answers.empty(); // clear answer buttons
+    for (
+      let i = 0;
+      i < questions[game.currentQuestion].answers.length;
+      i += 1
+    ) {
+      game.answers.append(
+        `<button class="answer-button" class="button">${
+          questions[game.currentQuestion].answers[i]
+        }</button>`,
       );
     }
   },
 
   // calling next question
   nextQuestion() {
-    game.count = countStartNumber;
-    $('#timed-number').html(game.count);
-    game.currentQuestion++;
+    $('#timed-number').html('30');
+    game.currentQuestion += 1;
+    game.count = 30;
     game.loadQuestion();
   },
 
@@ -162,17 +50,18 @@ const game = {
   timeUp() {
     clearInterval(timer);
     $('#timed-number').html(game.count);
-
-    panel.html('<h2>The Timer Ran Out!</h2>');
-    panel.append(
-      `<h3>The Answer Is: ${questions[this.currentQuestion].correctAnswer}`,
-      `<img src="${questions[this.currentQuestion].image}"/>`,
+    $('.timer').hide();
+    game.answers.hide();
+    game.question.html('<h2>If you dont try, youll never know.</h2>');
+    game.question.append(
+      `<h3>The Answer Is: ${questions[game.currentQuestion].correctAnswer}`,
+      `<img src="${questions[game.currentQuestion].image}"/>`,
     );
 
     if (game.currentQuestion === questions.length - 1) {
-      setTimeout(game.results, 3000);
+      setTimeout(game.results, game.delay);
     } else {
-      setTimeout(game.nextQuestion, 3000);
+      setTimeout(game.nextQuestion, game.delay);
     }
   },
 
@@ -181,45 +70,48 @@ const game = {
     clearInterval(timer);
 
     if (
-      $(e.target).data('name') === questions[this.currentQuestion].correctAnswer
+      e.target.textContent === questions[game.currentQuestion].correctAnswer
     ) {
-      this.answeredCorrectly();
+      game.answeredCorrectly();
     } else {
-      this.answeredIncorrectly();
+      game.answeredIncorrectly();
     }
   },
 
   // incorrect message
   answeredIncorrectly() {
-    game.incorrect++;
-    clearInterval(timer);
-    panel.html('<h2>Ah Man! That Wasnt Right!</h2>');
-    panel.append(
+    game.incorrect += 1;
+    $('.timer').hide();
+    game.answers.hide();
+    game.question.html(`<h2>Oh dear, what an awkward situation...</h2>`);
+    game.question.append(
       `<h3>The Answer Is: ${
         questions[game.currentQuestion].correctAnswer
       }</h3>`,
-      `<img src="${questions[this.currentQuestion].image}"/>`,
-    ),
-      `<img src="${questions[this.currentQuestion].image}"/>`;
+      `<img src="${questions[game.currentQuestion].image}"/>`,
+    );
 
     if (game.currentQuestion === questions.length - 1) {
-      setTimeout(game.results, 3000);
+      setTimeout(game.results, game.delay);
     } else {
-      setTimeout(game.nextQuestion, 3000);
+      setTimeout(game.nextQuestion, game.delay);
     }
   },
 
   // correct message
   answeredCorrectly() {
-    clearInterval(timer);
-    game.correct++;
-    panel.html('<h2>Yay! You Got It Right!</h2>'),
-      panel.append(`<img src="${questions[this.currentQuestion].image}"/>`);
+    game.correct += 1;
+    $('.timer').hide();
+    game.answers.hide();
+    game.question.html('<h2>See? All it takes is faith and trust.</h2>');
+    game.question.append(
+      `<img src="${questions[game.currentQuestion].image}"/>`,
+    );
 
     if (game.currentQuestion === questions.length - 1) {
-      setTimeout(game.results, 3000);
+      setTimeout(game.results, game.delay);
     } else {
-      setTimeout(game.nextQuestion, 3000);
+      setTimeout(game.nextQuestion, game.delay);
     }
   },
 
@@ -227,21 +119,52 @@ const game = {
   results() {
     clearInterval(timer);
 
-    panel.html('<h2>Good Job! Lets See How You Did.</h2>');
+    game.question.html(
+      '<h2>Goodbye? Oh no, please. Can’t we just go back to page one and start all over again?</h2>',
+    );
     $('#timed-number').html(game.count);
-    panel.append(`<h3>Answered Correctly: ${game.correct}</h3>`);
-    panel.append(`<h3>Answered Incorrectly: ${game.incorrect}</h3>`);
-    panel.append(
-      `<h3>Left Unanswered: ${questions.length -
+    game.question.append(
+      `<h3>Answered Correctly: ${game.correct}</h3><h3>Answered Incorrectly: ${
+        game.incorrect
+      }</h3><h3>Left Unanswered: ${questions.length -
         (game.incorrect + game.correct)}</h3>`,
     );
-    panel.append('<br><button class="play-again">Play Again</button>');
+    game.answers.empty(); // clear answer buttons
+    game.answers.append('<button id="play-again">Play Again</button>');
+    game.answers.fadeIn('slow');
   },
   reset() {
-    this.currentQuestion = 0;
-    this.count = countStartNumber;
-    this.correct = 0;
-    this.incorrect = 0;
-    this.loadQuestion();
+    game.currentQuestion = 0;
+    game.count = 30;
+    game.correct = 0;
+    game.incorrect = 0;
+    game.loadQuestion();
   },
 };
+
+$(document).ready(function() {
+  // click event: play again button
+  $(document).on('click', '#play-again', function() {
+    game.reset();
+  });
+
+  // click event: answer selected
+  $(document).on('click', '.answer-button', function(e) {
+    game.clicked(e);
+    $('.timer').hide();
+  });
+
+  // click event: start button
+  $(document).on('click', '.start', function() {
+    $('.question, .timer').show();
+    $('.timer').prepend(
+      '<h2>Time Remaining: <span id="timed-number">30</span> Seconds</h2>',
+    );
+    game.loadQuestion();
+    $('.start').remove();
+  });
+
+  if ($('.start').length) {
+    $('.question, .timer').hide();
+  }
+});

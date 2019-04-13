@@ -1,12 +1,14 @@
 @font-face {
-  font-family: 'minnie';
-  src: url('http://static.tumblr.com/npggxjg/wDFm11fnh/minnie_mouse.ttf');
-}
-
-@font-face {
   font-family: 'Disney';
   src: url('http://static.tumblr.com/npggxjg/VdAlzs1dx/disney.otf');
 }
+
+@font-face {
+  font-family: 'Disneyland';
+  src: url('http://static.tumblr.com/npggxjg/xGim6plqo/disneyland.ttf');
+}
+
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
 * {
   cursor: url(http://cur.cursors-4u.net/toons/too-9/too909.ani),
@@ -23,11 +25,24 @@ body {
   background-size: cover;
   margin: 0;
   padding: 0;
-  font-family: 'minnie', Arial, Helvetica, sans-serif;
+  font-family: 'Disneyland', Arial, Helvetica, sans-serif;
+}
+
+h2,
+span {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+button {
+  font-family: 'Shadows Into Light', cursive, sans-serif;
+  font-size: 1.5rem;
+  border-radius: 1rem;
 }
 
 .container {
-  margin: 1rem;
+  margin: 2rem;
   display: grid;
   align-items: center;
   height: 100vh;
@@ -41,12 +56,13 @@ body {
     'header'
     'timer'
     'question'
-    'answer';
+    'answers';
   background-color: rgba(31, 31, 31, 0.47);
   border-style: solid;
   border-width: 0.5px;
-  color: whitesmoke;
-  padding: 100px;
+  color: beige;
+  padding: 2rem;
+  justify-items: center;
 }
 
 .header {
@@ -57,30 +73,60 @@ body {
 
 .header > h1 {
   font-family: 'Disney', Arial, Helvetica, sans-serif;
-  font-size: 5rem;
+  font-size: 6rem;
   padding: 1rem;
   margin: 0;
+  color: beige;
 }
 
 .timer {
-  padding: 0.5rem;
-}
-
-.quiz {
   grid-area: timer;
-  text-align: center;
   padding: 0.5rem;
+  color: beige;
 }
 
-/* .question {
+.question {
   grid-area: question;
   text-align: center;
   padding: 0.5rem;
+  line-height: 2rem;
+  color: beige;
 }
 
-.answer {
-  grid-area: answer;
-  justify-self: center;
-  align-self: center;
-  text-align: center;
-} */
+.question > img {
+  min-width: 40%;
+  max-width: 80%;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.question > h3 {
+  margin: 0;
+  padding: 1rem;
+  font-size: 2.5rem;
+  text-shadow: 2px 3px 6px rgb(169, 64, 87);
+}
+.answers {
+  grid-area: answers;
+  display: grid;
+  grid-gap: 10px;
+  margin-top: 10px;
+}
+
+.answers > button {
+  padding: 10px;
+  background: rgba(169, 64, 87, 0.75);
+  color: white;
+  border: 0;
+  width: 100%;
+  min-width: 300px;
+}
+.answers > button:hover {
+  color: black;
+  background: rgba(249, 191, 25, 0.75);
+}
+
+.answers > .start {
+  padding: 5px;
+  font-size: 2rem;
+}
