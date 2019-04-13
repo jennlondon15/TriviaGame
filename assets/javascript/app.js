@@ -6,7 +6,7 @@ const game = {
   incorrect: 0,
   question: $('.question'),
   answers: $('.answers'),
-  delay: 5000,
+  delay: 8000,
 
   // timer count
   countdown() {
@@ -33,7 +33,7 @@ const game = {
       game.answers.append(
         `<button class="answer-button" class="button">${
           questions[game.currentQuestion].answers[i]
-        }</button>`,
+        }</button>`
       );
     }
   },
@@ -55,7 +55,7 @@ const game = {
     game.question.html('<h2>If you dont try, youll never know.</h2>');
     game.question.append(
       `<h3>The Answer Is: ${questions[game.currentQuestion].correctAnswer}`,
-      `<img src="${questions[game.currentQuestion].image}"/>`,
+      `<img src="${questions[game.currentQuestion].image}"/>`
     );
 
     if (game.currentQuestion === questions.length - 1) {
@@ -88,7 +88,7 @@ const game = {
       `<h3>The Answer Is: ${
         questions[game.currentQuestion].correctAnswer
       }</h3>`,
-      `<img src="${questions[game.currentQuestion].image}"/>`,
+      `<img src="${questions[game.currentQuestion].image}"/>`
     );
 
     if (game.currentQuestion === questions.length - 1) {
@@ -105,7 +105,7 @@ const game = {
     game.answers.hide();
     game.question.html('<h2>See? All it takes is faith and trust.</h2>');
     game.question.append(
-      `<img src="${questions[game.currentQuestion].image}"/>`,
+      `<img src="${questions[game.currentQuestion].image}"/>`
     );
 
     if (game.currentQuestion === questions.length - 1) {
@@ -120,14 +120,14 @@ const game = {
     clearInterval(timer);
 
     game.question.html(
-      '<h2>Goodbye? Oh no, please. Can’t we just go back to page one and start all over again?</h2>',
+      '<h2>Goodbye? Oh no, please. Can’t we just go back to page one and start all over again?</h2>'
     );
     $('#timed-number').html(game.count);
     game.question.append(
       `<h3>Answered Correctly: ${game.correct}</h3><h3>Answered Incorrectly: ${
         game.incorrect
       }</h3><h3>Left Unanswered: ${questions.length -
-        (game.incorrect + game.correct)}</h3>`,
+        (game.incorrect + game.correct)}</h3>`
     );
     game.answers.empty(); // clear answer buttons
     game.answers.append('<button id="play-again">Play Again</button>');
@@ -158,7 +158,7 @@ $(document).ready(function() {
   $(document).on('click', '.start', function() {
     $('.question, .timer').show();
     $('.timer').prepend(
-      '<h2>Time Remaining: <span id="timed-number">30</span> Seconds</h2>',
+      '<h2>Time Remaining: <span id="timed-number">30</span> Seconds</h2>'
     );
     game.loadQuestion();
     $('.start').remove();
