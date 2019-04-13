@@ -59,7 +59,7 @@ const questions = [
     question:
       'What is the name of the exclusive, invite-only car on the Disneyland Railroad?',
     answers: ['Lily Bell', 'C.K. Holliday', 'Ron Disney', 'Minnie Mouse'],
-    correctAnswer: 'Lilly Bell',
+    correctAnswer: 'Lily Bell',
     image: './assets/images/question7.jpg',
   },
   {
